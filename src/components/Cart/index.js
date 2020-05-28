@@ -15,7 +15,7 @@ const Cart = () => {
   }
 
   const line_items = checkout.lineItems.map(line_item => {
-    return <Link to={"/products/" + line_item.variant.product.handle}><LineItem key={line_item.id.toString()} line_item={line_item} /></Link>
+    return <LineItem key={line_item.id.toString()} line_item={line_item} />
   })
 
   let quantityArr = checkout.lineItems.map(line_item => line_item.quantity)
@@ -30,12 +30,12 @@ const Cart = () => {
     <div>
       {line_items}
       <h2>Subtotal</h2>
-      <p>£{numberOfItems > 2 ? checkout.subtotalPrice - 10 : checkout.subtotalPrice}</p>
-      <p>{numberOfItems > 2 && "Discount applied"}</p>
+      <p>£{checkout.subtotalPrice}</p>
+      <p>{numberOfItems > 2 && "Discount applied (Promotion: Buy 3+ items, save £10)"}</p>
       <br />
       <br />
       <h2>Total</h2>
-      <p>£{numberOfItems > 2 ? checkout.totalPrice - 10 : checkout.totalPrice}</p>
+      <p>£{checkout.totalPrice}</p>
       <br />
       <button onClick={handleCheckout} disabled={checkout.lineItems.length === 0}>Check out</button>
     </div>

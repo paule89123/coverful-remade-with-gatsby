@@ -15,7 +15,7 @@ const ProductGrid = () => {
   const { allShopifyProduct } = useStaticQuery(
     graphql`
       query {
-        allShopifyProduct(filter: {tags: {eq: "surreal"}}
+        allShopifyProduct(filter: {tags: {eq: "japanese"}}
           sort: {
             fields: [createdAt]
             order: ASC
@@ -33,7 +33,7 @@ const ProductGrid = () => {
                 localFile {
                   childImageSharp {
                     fixed(
-                    width: 282
+                    width: 330
                     ) {
                       ...GatsbyImageSharpFixed
                     }

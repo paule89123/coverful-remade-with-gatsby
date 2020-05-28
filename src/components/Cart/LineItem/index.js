@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'gatsby'
 
 import StoreContext from '~/context/StoreContext'
 import { Wrapper } from './styles'
@@ -20,7 +21,7 @@ const LineItem = props => {
 
   const selectedOptions = line_item.variant.selectedOptions
     ? line_item.variant.selectedOptions.map(
-        option => `${option.name}: ${option.value} `
+        option => `${option.value} `
       )
     : null
 
@@ -30,11 +31,22 @@ const LineItem = props => {
 
   return (
     <Wrapper>
-      {variantImage}
+      {console.log(line_item)}
+      <Link to={`/products/${line_item.variant.product.handle}/`}>
+        {variantImage}
+      </Link>
       <p>
         {line_item.title}
       </p>
+      <p>
+      {selectedOptions}
+      </p>
+      <p>
       {line_item.quantity}
+      </p>
+      <p>
+      {"£" + line_item.variant.price * line_item.quantity + ".00"}
+      </p>
       <button onClick={handleRemove}>Remove</button>
     </Wrapper>
   )

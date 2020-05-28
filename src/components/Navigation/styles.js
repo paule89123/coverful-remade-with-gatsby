@@ -8,11 +8,12 @@ export const Wrapper = styled.div`
   width: 100%;
   background: white;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  box-shadow: 0px 4px 4px -4px rgb(190,190,190);
+  box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.2);
   position: sticky;
   top: 0px;
-  z-index: 1;
+  z-index: 2;
 `
 
 export const Container = styled.div`
@@ -27,15 +28,14 @@ export const Container = styled.div`
   max-width: 1120px;
   position: sticky;
   top: 0px;
-  z-index: 1;
+  z-index: 2;
 `
 
 export const Logo = styled(Link)`
-  color: rgb(43, 20, 83);
   text-transform: uppercase;
   text-decoration: none;
   font-size: 1.25rem;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   font-weight: bold;
   padding-right: 32px;
   margin-left: -2px;
@@ -46,12 +46,11 @@ export const Logo = styled(Link)`
 `
 
 export const MenuLink = styled(Link)`
-  color: rgb(43, 20, 83);
   text-decoration: none;
   font-size: 0.95rem;
   letter-spacing: 1px;
   font-weight: bold;
-  padding-right: 32px;
+  padding: 0px 16px;
 
   @media (max-width: ${breakpoints.s}px){
     font-size: 1rem
@@ -60,7 +59,7 @@ export const MenuLink = styled(Link)`
 
 export const CartCounter = styled.div`
   position: absolute;
-  margin-top: 1px;
+  margin-top: 3px;
   margin-left: 2px;
   text-align: center;
   color: white;

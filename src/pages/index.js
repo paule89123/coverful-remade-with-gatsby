@@ -7,7 +7,7 @@ import banner from '../images/banner.jpeg'
 
 
 const IndexPage = () => (
-  <>
+  <div>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <img style={{position: "absolute", left: 0}} src={banner} />
     <div style={{height: 265}}></div>
@@ -15,7 +15,7 @@ const IndexPage = () => (
     <div style={{textAlign: "center"}}>Surreal</div>
     <ProductGrid />
     <Link to="/page-2/">Go to page 2</Link>
-  </>
+  </div>
 )
 
 export default IndexPage

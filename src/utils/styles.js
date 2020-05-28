@@ -18,12 +18,98 @@ export const GlobalStyle = props => (
     styles={css`
       body {
         margin: 0;
-        font-family: 'Brandon Grotesque Regular';
+        font-family: 'Avenir';
+        font-weight: 700;
       }
       html {
         font-family: sans-serif;
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
+      }
+      .pastel1 {
+        background-color: #d6f2fe;
+      }
+      .pastel2 {
+        background-color: #c1edff;
+      }
+      .pastel3 {
+        background-color: #ffe3f4;
+      }
+      .pastel4 {
+        background-color: #fef8d4;
+      }
+      .pastel5 {
+        background-color: #ffe5dc;
+      }
+      .pastel6 {
+        background-color: #fde8ef;
+      }
+      .pastel7 {
+        background-color: #f8fddf;
+      }
+      .pastel8 {
+        background-color: #cef7fd;
+      }
+      .pastel9 {
+        background-color: #e5ffe6;
+      }
+      .black-text, a {
+        color: rgb(38,38,38);
+        text-decoration: none;
+      }
+      .ais-Highlight-highlighted {
+        background-color: #cef7fd;
+        font-style: normal;
+        padding-top: 3px;
+        padding-bottom: 1px;
+        border-radius: 3px;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .hits-item-small {
+        padding: 0px;
+        font-size: 14px;
+        font-family: 'AvenirBold';
+      }
+      .hits-item-small:hover {
+        background-color: rgb(246,246,246);
+      }
+      .ais-SearchBox-submit, .ais-SearchBox-reset {
+        width: 0px;
+        position: absolute;
+        display: none;
+      }
+      .visible {
+        display: block;
+      }
+      .hidden {
+        display: none;
+      }
+      .grid .ais-Hits .ais-Hits-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0rem;
+
+        @media (max-width: ${breakpoints.s}px){
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+      .grid .ais-Hits .ais-Hits-list .ais-Hits-item {
+        display: flex;
+        min-height: 100%;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .ais-Pagination-list {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+      }
+      .ais-Pagination-item {
+        padding: 10px;
       }
     `}
   />
@@ -131,7 +217,7 @@ export const Img = styled(Image)`
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 1rem;
 `
 
 export const Container = styled.div`

@@ -108,17 +108,39 @@ const ProductForm = ({ product }) => {
     <>
       <div
         style={{
-          fontSize: 18,
+          fontSize: 16,
           opacity: "0.6",
           textAlign: "center"
         }}
       >{price}</div>
       <br />
-      <div style={{backgroundColor: "rgb(239, 237, 243)", textAlign: "center", padding: 15}}>
-        <span style={{fontSize: 18, fontWeight: "700"}}>Just for you:</span>
+      <div className="pastel" style={{textAlign: "center", padding: 16, lineHeight: "1.4"}}>
+        <span style={{fontFamily: "AvenirBold"}}>Just for you:</span>
         <br />Buy 3 cushion covers, save £10
       </div>
       <br />
+
+      {options.map(({ id, name, values }, index) => (
+        <React.Fragment key={id}>
+          <label htmlFor={name}>{name} </label>
+          <select
+            name={name}
+            key={id}
+            onChange={event => handleOptionChange(index, event)}
+          >
+            {values.map(value => (
+              <option
+                value={value}
+                key={`${name}-${value}`}
+                disabled={checkDisabled(name, value)}
+              >
+                {value}
+              </option>
+            ))}
+          </select>
+          <br />
+        </React.Fragment>
+      ))}
 
       <div style={{display: "flex", justifyContent: "space-between"}}>
           <input
@@ -136,7 +158,7 @@ const ProductForm = ({ product }) => {
               padding: "16px 0px",
               marginLeft: 4,
               marginTop: 2,
-              color: "rgb(43,20,83)",
+              color: "rgb(38,38,38)",
               border: "none",
               width: 188,
               fontSize: 13,
@@ -144,19 +166,20 @@ const ProductForm = ({ product }) => {
               fontWeight: "500"
             }}
           />
-          <div style={{position: "relative", border: "1px solid rgb(43, 20, 83)", width: "48%", height: 50, display: "flex", alignItems: "center"}}>
+          <div style={{position: "relative", border: "1px solid rgb(38,38,38)", width: "48%", height: 50, display: "flex", alignItems: "center"}}>
               <div style={{cursor: "pointer", position: "relative", width: "50%", textAlign: "center", top: 3, right: 3}} onClick={() => handleClick("decrease")}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#2B1453" fill-rule="evenodd" clip-rule="evenodd" d="M7 13H17V11H7V13Z"></path></svg></div>
               <div style={{cursor: "pointer", position: "relative", width: "50%", textAlign: "center", top: 3}} onClick={() => handleClick("increase")}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.2496 12.7494L7 12.7454L7.001 11.2456L11.2506 11.2496L11.2546 7L12.7544 7.001L12.7504 11.2506L17 11.2546L16.999 12.7544L12.7494 12.7504L12.7454 17L11.2456 16.999L11.2496 12.7494Z" fill="#2B1453"></path></svg></div>
           </div>
           
           <button
+            className="pastel2"
             type="submit"
             disabled={!available || adding}
             onClick={handleAddToCart}
             style={{
-              backgroundColor: "rgb(43, 20, 83)",
+              backgroundColor: "rgb(38,38,38)",
               color: "white",
-              border: "1px solid rgb(43, 20, 83)",
+              border: "1px solid rgb(38,38,38)",
               borderRadius: 0,
               width: "48%",
               display: "inline-block",

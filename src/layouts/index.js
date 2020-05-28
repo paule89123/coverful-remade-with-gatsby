@@ -12,10 +12,9 @@ const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 1020px;
   padding: 0px 0rem 1.45rem;
-  color: rgb(43, 20, 83);
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   return (
     <ContextProvider>
       <GlobalStyle />
@@ -30,8 +29,8 @@ const Layout = ({ children }) => {
           }
         `}
         render={data => (
-          <>
-            <Navigation siteTitle={data.site.siteMetadata.title} />
+          <div>
+            <Navigation location={location} siteTitle={data.site.siteMetadata.title} />
             <Wrapper>
               {children}
               <footer>
@@ -40,7 +39,7 @@ const Layout = ({ children }) => {
                 <a href="https://www.gatsbyjs.org">Gatsby</a>
               </footer>
             </Wrapper>
-          </>
+          </div>
         )}
       />
     </ContextProvider>

@@ -4,6 +4,33 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
 
+const myQuery = `{
+      allShopifyProduct(filter: {tags: {eq: "japanese"}}) {
+        edges {
+          node {
+            objectID: id
+            title
+            handle
+            images {
+              localFile {
+                url
+              }
+            }
+            variants {
+              price
+            }
+          }
+        }
+      }
+}`;
+
+const queries = [
+  {
+    query: myQuery,
+    transformer: ({ data }) => data.allShopifyProduct.edges.map(({ node }) => node), // optional
+  },
+];
+
 module.exports = {
   siteMetadata: {
     title: `Coverful`,
@@ -69,6 +96,20 @@ module.exports = {
         trackingId: "UA-134421805-1",
         anonymize: true,
         respectDNT: true,
+      },
+    },
+    `gatsby-plugin-styled-components`,
+    {
+      // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        // Careful, no not prefix this with GATSBY_, since that way users can change
+        // the data in the index.
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
+        queries,
+        chunkSize: 10000, // default: 1000
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

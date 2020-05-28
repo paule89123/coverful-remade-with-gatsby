@@ -10,6 +10,9 @@ var plugins = [{
     },{
       plugin: require('/Users/paulevans/Documents/coverful2/node_modules/gatsby-plugin-google-analytics/gatsby-ssr'),
       options: {"plugins":[],"trackingId":"UA-134421805-1","anonymize":true,"respectDNT":true},
+    },{
+      plugin: require('/Users/paulevans/Documents/coverful2/node_modules/gatsby-plugin-styled-components/gatsby-ssr'),
+      options: {"plugins":[]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
