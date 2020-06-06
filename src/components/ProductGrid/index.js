@@ -15,7 +15,7 @@ const ProductGrid = () => {
   const { allShopifyProduct } = useStaticQuery(
     graphql`
       query {
-        allShopifyProduct(filter: {tags: {eq: "japanese"}}
+        allShopifyProduct(filter: {tags: {eq: "butterflies"}}
           sort: {
             fields: [createdAt]
             order: ASC

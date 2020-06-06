@@ -18,6 +18,7 @@ export const Product = styled.div`
   min-height: 100%;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 6px;
 `
 
 export const Title = styled.span`
