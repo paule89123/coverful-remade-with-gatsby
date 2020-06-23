@@ -6,7 +6,9 @@ import { breakpoints } from '../../utils/styles'
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0rem;
+  grid-row-gap: 40px;
+  margin-left: -50px;
+  width: calc(100% + 94px);
 
   @media (max-width: ${breakpoints.s}px){
     grid-template-columns: repeat(1, 1fr);
@@ -18,7 +20,6 @@ export const Product = styled.div`
   min-height: 100%;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 6px;
 `
 
 export const Title = styled.span`

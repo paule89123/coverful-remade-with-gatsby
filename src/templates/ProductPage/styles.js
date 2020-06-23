@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
 
 export const ProductTitle = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   word-wrap: break-word;
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   font-family: 'PlayfairDisplay';
-  font-weight: 560;
+  font-weight: 400;
 `
 
 export const ProductDescription = styled.div`

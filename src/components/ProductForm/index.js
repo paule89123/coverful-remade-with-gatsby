@@ -5,7 +5,31 @@ import PropTypes from 'prop-types'
 
 import StoreContext from '~/context/StoreContext'
 
+
+
 const ProductForm = ({ product }) => {
+  const activeStyle = {
+  borderBottom: "1px solid black",
+  display: "inline-block",
+  cursor: "pointer",
+  paddingBottom: 8,
+  fontFamily: "AvenirBold",
+  marginBottom: -1,
+  marginRight: 36,
+  fontSize: 13,
+  letterSpacing: 1
+}
+
+const inactiveStyle = {
+  display: "inline-block",
+  cursor: "pointer",
+  paddingBottom: 8,
+  marginBottom: -1,
+  marginRight: 36,
+  fontSize: 13,
+  letterSpacing: 1
+}
+
   const {
     options,
     variants,
@@ -14,6 +38,9 @@ const ProductForm = ({ product }) => {
   } = product
   const [variant, setVariant] = useState({ ...initialVariant })
   const [quantity, setQuantity] = useState(1)
+  const [detailsActive, setDetailsActive] = useState(true)
+  const [shippingActive, setShippingActive] = useState(false)
+
   const {
     addVariantToCart,
     store: { client, adding },
@@ -104,94 +131,118 @@ const ProductForm = ({ product }) => {
     }
   }
 
+  function handleDetailsClick() {
+    setDetailsActive(true)
+    setShippingActive(false)
+  }
+
+  function handleShippingClick() {
+    setDetailsActive(false)
+    setShippingActive(true)
+  }
+
   return (
     <>
       <div
         style={{
-          fontSize: 16,
-          opacity: "0.6",
-          textAlign: "center"
+          fontSize: 18,
+          width: 70,
+          opacity: "0.65"
         }}
       >{price}</div>
+
       <br />
-      <div className="pastel" style={{textAlign: "center", padding: 16, lineHeight: "1.4"}}>
-        <span style={{fontFamily: "AvenirBold"}}>Just for you:</span>
-        <br />Buy 3 cushion covers, save £10
+
+      <div className="pastel" style={{display: "inline-block", padding: "12px 24px", lineHeight: "1.4", backgroundColor: "rgba(197, 155, 141,0.1)", fontFamily: "AvenirBold", color: "rgba(197, 155, 141,1)", fontSize: 16}}>
+        Buy any 3 cushion covers, save £10
       </div>
-      <br />
+
+      <br /><br /><br />
+
+      <div>
+        <div style={{borderBottom: "1px solid rgba(0,0,0,0.2)", marginBottom: 16}}>
+          <div onClick={handleDetailsClick} style={detailsActive ? activeStyle : inactiveStyle}>DETAILS</div>
+          <div onClick={handleShippingClick} style={shippingActive ? activeStyle : inactiveStyle}>SHIPPING, EXCHANGES & REFUNDS</div>
+        </div>
+        {detailsActive && 
+          <ul style={{lineHeight: "1.4", listStyleType: "disc", listStylePosition: "inside"}}>
+            <li>Cotton-linen blend cushion cover</li>
+            <li>45cm x 45cm</li>
+            <li>Inner cushion not included</li>
+          </ul>
+        }
+        {shippingActive && <div>Shipping info here</div>}
+      </div>
+
+      
+
+      <br /><br />
+
 
       {options.map(({ id, name, values }, index) => (
         <React.Fragment key={id}>
-          <label htmlFor={name}>{name} </label>
-          <select
+          <label htmlFor={name} style={{lineHeight: "1.4", fontSize: 13, letterSpacing: 1, fontFamily: "AvenirBold", marginBottom: 8, display: "inline-block"}}>DESIGN</label>
+          <form
+            style={{display: "flex", width: "100%", flexWrap: "nowrap"}}
             name={name}
             key={id}
             onChange={event => handleOptionChange(index, event)}
           >
-            {values.map(value => (
-              <option
+            {values.map((value, i) => (
+              <>
+              <label style={variant.selectedOptions[0].value === value ? {cursor: "pointer", lineHeight: "1.4", textAlign: "center", border: "2px solid #66afed", padding: "12px 24px", display: "inline-block", borderRadius: 4, flexGrow: "1", width: "50%"} : {lineHeight: "1.4", textAlign: "center", border: "1px solid rgba(0,0,0,0.2)", marginLeft: 1, marginRight: 1, padding: "13px 24px", display: "inline-block", borderRadius: 4, flexGrow: "1", width: "50%", cursor: "pointer"}}>
+              <input
+                type="radio"
+                name={name}
                 value={value}
                 key={`${name}-${value}`}
                 disabled={checkDisabled(name, value)}
-              >
-                {value}
-              </option>
+                style={{display: "none"}}
+              />
+              <span style={{fontFamily: "AvenirBold"}}>{value}</span>
+              <br />
+              <span style={{fontSize: 14}}>£{variants[i].price}</span>
+              </label>
+              {i === 0 && <div style={{width: 12}}></div>}
+              </>
             ))}
-          </select>
+          </form>
           <br />
         </React.Fragment>
       ))}
 
-      <div style={{display: "flex", justifyContent: "space-between"}}>
-          <input
-            aria-label="quantity"
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            step="1"
-            onChange={handleQuantityChange}
-            value={quantity}
-            style={{
-              boxSizing: "border-box",
-              position: "absolute",
-              padding: "16px 0px",
-              marginLeft: 4,
-              marginTop: 2,
-              color: "rgb(38,38,38)",
-              border: "none",
-              width: 188,
-              fontSize: 13,
-              textAlign: "center",
-              fontWeight: "500"
-            }}
-          />
-          <div style={{position: "relative", border: "1px solid rgb(38,38,38)", width: "48%", height: 50, display: "flex", alignItems: "center"}}>
-              <div style={{cursor: "pointer", position: "relative", width: "50%", textAlign: "center", top: 3, right: 3}} onClick={() => handleClick("decrease")}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#2B1453" fill-rule="evenodd" clip-rule="evenodd" d="M7 13H17V11H7V13Z"></path></svg></div>
-              <div style={{cursor: "pointer", position: "relative", width: "50%", textAlign: "center", top: 3}} onClick={() => handleClick("increase")}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.2496 12.7494L7 12.7454L7.001 11.2456L11.2506 11.2496L11.2546 7L12.7544 7.001L12.7504 11.2506L17 11.2546L16.999 12.7544L12.7494 12.7504L12.7454 17L11.2456 16.999L11.2496 12.7494Z" fill="#2B1453"></path></svg></div>
-          </div>
-          
-          <button
+      
+
+        <br />
+
+        <button
             className="pastel2"
             type="submit"
             disabled={!available || adding}
             onClick={handleAddToCart}
             style={{
-              backgroundColor: "rgb(38,38,38)",
+              background: "linear-gradient(145deg,HSL(127,72%,85%),HSL(213,93%,64%)",
+              borderRadius: 30,
               color: "white",
-              border: "1px solid rgb(38,38,38)",
-              borderRadius: 0,
-              width: "48%",
-              display: "inline-block",
-              padding: "16px 0px",
-              fontSize: 13,
+              border: "none",
+              padding: 2,
+              cursor: "pointer",
+              fontSize: 15,
               fontWeight: "500",
               letterSpacing: 0.5
             }}
           >
-            Add To Bag
+            <div style={{
+              padding: "9px 20px 10px",
+              borderRadius: 30,
+              color: "black",
+              background: "white",
+              fontSize: 14
+            }}>Add to Bag</div>
           </button>
-        </div>
+
+          <br />
+
       {!available && <p>This Product is out of Stock!</p>}
     </>
   )

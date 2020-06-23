@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
-import animals from './animals.jpeg'
-import famousfaces from './famousfaces.jpeg'
-import japanese from './famousfaces.jpeg'
-import surreal from './surreal.jpeg'
+import animals from './animals1.jpeg'
+import famousfaces from './famousfaces1.jpg'
+import art from './art1.jpeg'
 import { Img } from '~/utils/styles'
 
 
@@ -31,7 +30,7 @@ const menuStyle = {
 const Menu = ({ menuActive }) => {
 	const [ activeCategory, setActiveCategory ] = useState(animals)
 
-	const categoriesVariables = [animals, famousfaces, surreal, japanese]
+	const categoriesVariables = [animals, art, famousfaces]
 	const categoriesStrings = ["Animals", "Art", "Famous Faces", "Film/TV", "Food", "Patterns", "Japanese", "Nature", "Retro", "Surreal"]
 	const collections = ["New In", "Most Loved", "Collections", "Final Few"]
 	const categories = categoriesStrings.concat(collections).map((item, i) => {

@@ -4,7 +4,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return graphql(`
     {
-      allShopifyProduct(filter: {tags: {eq: "butterflies"}}) {
+      allShopifyProduct {
         edges {
           node {
             handle

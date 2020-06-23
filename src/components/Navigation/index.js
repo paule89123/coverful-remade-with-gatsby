@@ -31,7 +31,7 @@ const path = globalHistory.location.pathname
 
 const SearchResultsWrapper = styled.div`
   margin: 0 auto;
-  max-width: 1020px;
+  max-width: 980px;
   padding: 0px 0rem 1.45rem;
 `
 
@@ -82,7 +82,7 @@ const Navigation = ({ siteTitle, location }) => {
   }
 
   function handleMouseOver() {
-  	setMenuActive(true)
+  	setMenuActive(prevState => !prevState)
   }
 
   function handleOnMouseOut() {
@@ -103,7 +103,7 @@ const Navigation = ({ siteTitle, location }) => {
 	return(
 		<>
 			<InstantSearch searchClient={searchClient} indexName="coverful">
-				<div className="pastel8" style={{height: "2.535rem", color: "rgb(38,38,38)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 14}}>Enjoy free shipping on all UK orders! Shipping to rest of the world: £2.99
+				<div style={{height: "2.535rem", color: "rgb(38,38,38)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 14, backgroundColor: "#f7f7f7"}}>Enjoy free shipping on all UK orders! Shipping to rest of the world: £2.99
 				</div>
 				<Wrapper>
 					<Container className="black-text">
@@ -111,7 +111,7 @@ const Navigation = ({ siteTitle, location }) => {
 							<Logo to='/'>
 								{siteTitle}
 							</Logo>
-							<div style={{fontSize: "0.95rem", letterSpacing: 1, fontWeight: "bold", padding: "0px 16px 80px 10px", display: "inline"}} onMouseOver={handleMouseOver} onMouseOut={handleOnMouseOut}>
+							<div style={{fontSize: "15px", letterSpacing: 1, fontWeight: "bold", padding: "0px 16px 80px 10px", display: "inline"}} onClick={handleMouseOver}>
 							<div style={{width: 80, height: 40, position: "absolute", marginLeft: 0, display: "inline", cursor: "pointer"}}></div>
 
 								<span style={menuActive ? {opacity: 0.7, transition: "0.2s opacity cubic-bezier(0.65, 0.005, 0.35, 0.995)", cursor: "pointer"} : {opacity: "1", cursor: "pointer"}}>SHOP</span>
@@ -137,7 +137,10 @@ const Navigation = ({ siteTitle, location }) => {
 								</MenuLink>
 							</HoverLinkStyle>
 						</div>
-						<div style={{width: 260}}>
+
+
+						<div style={{display: "flex"}}>
+						<div style={{width: 260, backgroundColor: "none"}}>
 							<div style={{textAlign: "center"}}>
 								<SearchBox onSubmit={handleSubmit} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur}/>
 							</div>
@@ -146,10 +149,13 @@ const Navigation = ({ siteTitle, location }) => {
 								<Hits className="hits-small" hitComponent={SearchResult} />
 							</div>
 						</div>
-						<MenuLink style={{position: "relative", display: "flex", justifyContent: "center", height: "100%", alignItems: "center", paddingRight: 0, width: 22}} to='/cart'>
+
+						<MenuLink style={{position: "relative", display: "flex", justifyContent: "center", height: "36px", alignItems: "center", paddingRight: 0, width: 22}} to='/cart'>
 							<img alt="basket" style={{height: 22, position: "absolute", marginLeft: 2}} src={hasItems ? blackBag : whiteBag} />
 							{hasItems && <CartCounter>{quantity}</CartCounter>}
 						</MenuLink>
+						</div>
+
 					</Container>
 				</Wrapper>
 

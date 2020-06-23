@@ -16,19 +16,77 @@ import {
 } from './styles'
 
 const ProductPage = ({ data }) => {
+  const activeThumbnailStyle = {
+    cursor: "pointer", 
+    margin: "0px 6px", 
+    border: "1px solid rgba(0,0,0,0.65)", 
+    display: "inline-block", 
+    borderRadius: "50%"
+  }
+  const inactiveThumbnailStyle = {
+    cursor: "pointer", 
+    margin: "0px 6px", 
+    border: "1px solid rgba(0,0,0,0)", 
+    display: "inline-block", 
+    borderRadius: "50%"
+  }
   const [ activeImage, setActiveImage ] = useState()
+  const [ imageIndex, setImageIndex ] = useState(0)
   const product = data.shopifyProduct
 
-  const images = product.images.map(image => (<Img
-    fluid={image.localFile.childImageSharp.fluid}
-    key={image.id}
-    alt={product.title}
-  />))
+  const images = product.images.map((image, i) => (
+    i === 0 ? 
+    <div style={{boxSizing: "border-box", padding: "54px 37px 38px 29px", background: "linear-gradient(140deg, rgba(220,225,255), rgba(10,10,30, 0.07))"}}>
+      <Img
+        fluid={image.localFile.childImageSharp.fluid}
+        key={image.id}
+        alt={product.title}
+      />
+    </div>
+    :
+    <div style={{height: 461.375}}>
+    <Img
+        fluid={image.localFile.childImageSharp.fluid}
+        key={image.id}
+        alt={product.title}
+        style={{height: 461.375}}
+    />
+</div>
 
-  const imageThumbnails = images.map((image, i) => <div onClick={() => handleClick(i)}>{images[i]}</div>)
+  ))
+
+  const imageThumbnails = product.images.map((image, i) => (
+        i === 0 ? 
+        <div style={imageIndex === i ? activeThumbnailStyle : inactiveThumbnailStyle}>
+    <div onClick={() => handleClick(i)} style={{margin: 2, borderRadius: "50%", width: 36, height: 36, overflow: "hidden", boxSizing: "border-box", padding: "4px 0px 0px 0px", background: "linear-gradient(140deg, rgba(220,225,255), rgba(10,10,30, 0.1))"}}>
+
+      <Img
+        fluid={image.localFile.childImageSharp.fluid}
+        key={image.id}
+        alt={product.title}
+      />
+
+    </div>
+    </div>
+    :
+    <div style={imageIndex === i ? activeThumbnailStyle : inactiveThumbnailStyle}>
+    <div style={{margin: 2, borderRadius: "50%", width: 36, height: 36, overflow: "hidden", boxSizing: "border-box"}} onClick={() => handleClick(i)}>
+      <div style={{width: 68}}>
+        <Img
+            fluid={image.localFile.childImageSharp.fluid}
+            key={image.id}
+            alt={product.title}
+        />
+      </div>
+    </div>
+    </div>
+
+    ))
+
 
   function handleClick(i) {
     setActiveImage(images[i])
+    setImageIndex(i)
     // console.log(e.target);
   }
   return (
@@ -37,19 +95,21 @@ const ProductPage = ({ data }) => {
       <Container>
         <TwoColumnGrid>
           <GridLeft>
-            {images[1] && <div style={{width: "16.67%"}}>
-              {imageThumbnails}
-            </div>}
-            <div style={{width: "83.33%", padding: "0px 40px 0px 20px", boxSizing: "border-box"}}>
+            
+            <div style={{width: "100%", padding: "0px 72px 0px 0px"}}>
               {activeImage ? activeImage : images[0]}
             </div>
+            {images[1] && 
+            <div style={{margin: "28px auto", paddingRight: 72}}>
+              {imageThumbnails}
+            </div>}
           </GridLeft>
-          <GridRight>
-            <ProductTitle style={{textAlign: "center"}}>{product.title}</ProductTitle>
+          <GridRight style={{opacity: "1"}}>
+            <ProductTitle style={{}}>{product.title}</ProductTitle>
             <ProductForm product={product} />
             <br /><br />
-            <div style={{fontSize: 13, textAlign: "center"}}>
-              <span style={{fontWeight: 700}}>Our Happiness Promise</span>
+            <div style={{fontSize: 14, lineHeight: "1.4"}}>
+              <span style={{fontFamily: "Avenir-Medium", fontSize: 16}}>Our Happiness Promise</span>
               <br />We stand behind our products. If you don’t love it, <br />exchanges and returns are free for 60 days. 
             </div>
           </GridRight>

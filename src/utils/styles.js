@@ -20,6 +20,7 @@ export const GlobalStyle = props => (
         margin: 0;
         font-family: 'Avenir';
         font-weight: 700;
+        color: rgb(38,38,38);
       }
       html {
         font-family: sans-serif;
@@ -58,11 +59,18 @@ export const GlobalStyle = props => (
         text-decoration: none;
       }
       .ais-Highlight-highlighted {
-        background-color: #cef7fd;
+        background: rgba(78, 155, 249,0.2);
         font-style: normal;
         padding-top: 3px;
         padding-bottom: 1px;
         border-radius: 3px;
+      }
+      .ais-SearchBox-input {
+        background-color: rgba(0,0,0,0.02);
+        border: none;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 24px;
+        padding: 10px 15px;
       }
       ul {
         margin: 0;
@@ -234,14 +242,16 @@ export const TwoColumnGrid = styled.div`
 `
 
 export const GridLeft = styled.div`
-  margin-top: 30px;
+  margin-top: 48px;
   display: flex;
-  width: 62%;
+  width: 58.2%;
+  flex-wrap: wrap;
+  align-content: flex-start;
 `
 
 export const GridRight = styled.div`
-  margin-top: 50px;
-  width: 38%;
+  margin-top: 48px;
+  width: 41.8%;
 `
 
 export const MainContent = styled.main`

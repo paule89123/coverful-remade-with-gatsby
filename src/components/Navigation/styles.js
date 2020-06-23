@@ -25,7 +25,7 @@ export const Container = styled.div`
   height: 4.1rem;
   margin: 0 auto;
   width: 100%;
-  max-width: 1120px;
+  max-width: 980px;
   position: sticky;
   top: 0px;
   z-index: 2;
@@ -47,7 +47,7 @@ export const Logo = styled(Link)`
 
 export const MenuLink = styled(Link)`
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 15px;
   letter-spacing: 1px;
   font-weight: bold;
   padding: 0px 16px;
@@ -59,7 +59,7 @@ export const MenuLink = styled(Link)`
 
 export const CartCounter = styled.div`
   position: absolute;
-  margin-top: 3px;
+  margin-top: 4px;
   margin-left: 2px;
   text-align: center;
   color: white;
