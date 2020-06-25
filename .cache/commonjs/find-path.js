@@ -15,13 +15,24 @@ const pathCache = new Map();
 let matchPaths = [];
 
 const trimPathname = rawPathname => {
-  let pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
+  const pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
 
-  let trimmedPathname = (0, _stripPrefix.default)(pathname, __BASE_PATH__) // Remove any hashfragment
+  const trimmedPathname = (0, _stripPrefix.default)(pathname, __BASE_PATH__) // Remove any hashfragment
   .split(`#`)[0] // Remove search query
   .split(`?`)[0];
   return trimmedPathname;
 };
+
+function absolutify(path) {
+  // If it's already absolute, return as-is
+  if (path.startsWith(`/`) || path.startsWith(`https://`) || path.startsWith(`http://`)) {
+    return path;
+  } // Calculate path relative to current location, adding a trailing slash to
+  // match behavior of @reach/router
+
+
+  return new URL(path, window.location.href + (window.location.href.endsWith(`/`) ? `` : `/`)).pathname;
+}
 /**
  * Set list of matchPaths
  *
@@ -61,7 +72,7 @@ const findMatchPath = rawPathname => {
 // `#` and query params), or if it matches an entry in
 // `match-paths.json`, its matched path is returned
 //
-// E.g `/foo?bar=far` => `/foo`
+// E.g. `/foo?bar=far` => `/foo`
 //
 // Or if `match-paths.json` contains `{ "/foo*": "/page1", ...}`, then
 // `/foo?bar=far` => `/page1`
@@ -70,7 +81,7 @@ const findMatchPath = rawPathname => {
 exports.findMatchPath = findMatchPath;
 
 const findPath = rawPathname => {
-  const trimmedPathname = trimPathname(rawPathname);
+  const trimmedPathname = trimPathname(absolutify(rawPathname));
 
   if (pathCache.has(trimmedPathname)) {
     return pathCache.get(trimmedPathname);
@@ -87,7 +98,7 @@ const findPath = rawPathname => {
 };
 /**
  * Clean a url and converts /index.html => /
- * E.g `/foo?bar=far` => `/foo`
+ * E.g. `/foo?bar=far` => `/foo`
  *
  * @param {string} rawPathname A raw pathname
  * @return {string}
@@ -97,7 +108,7 @@ const findPath = rawPathname => {
 exports.findPath = findPath;
 
 const cleanPath = rawPathname => {
-  const trimmedPathname = trimPathname(rawPathname);
+  const trimmedPathname = trimPathname(absolutify(rawPathname));
   let foundPath = trimmedPathname;
 
   if (foundPath === `/index.html`) {
