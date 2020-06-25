@@ -27,6 +27,9 @@ export const GlobalStyle = props => (
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
       }
+      :focus {
+        outline: none;
+      }
       .pastel1 {
         background-color: #d6f2fe;
       }

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react'
+import { Link } from 'gatsby'
 import find from 'lodash/find'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
@@ -162,7 +163,7 @@ const inactiveStyle = {
       <div>
         <div style={{borderBottom: "1px solid rgba(0,0,0,0.2)", marginBottom: 16}}>
           <div onClick={handleDetailsClick} style={detailsActive ? activeStyle : inactiveStyle}>DETAILS</div>
-          <div onClick={handleShippingClick} style={shippingActive ? activeStyle : inactiveStyle}>SHIPPING, EXCHANGES & REFUNDS</div>
+          <div onClick={handleShippingClick} style={shippingActive ? activeStyle : inactiveStyle}>SHIPPING, RETURNS & REFUNDS</div>
         </div>
         {detailsActive && 
           <ul style={{lineHeight: "1.4", listStyleType: "disc", listStylePosition: "inside"}}>
@@ -171,7 +172,10 @@ const inactiveStyle = {
             <li>Inner cushion not included</li>
           </ul>
         }
-        {shippingActive && <div>Shipping info here</div>}
+        {shippingActive && <div style={{fontSize: 16, lineHeight: "1.4"}}>
+We offer FREE UK tracked delivery on all orders. Tracked airmail to the rest of the world is just £1.99. See <Link style={{color: "#7e7e7e", borderBottom: "1px dashed #7e7e7e"}} to="/shipping-and-payment">Shipping & Payment</Link> for more info.
+<br /><br />
+We want you to be completely happy with your Coverful purchase. If you don’t love it, exchanges and returns are free for 30 days. See <Link style={{color: "#7e7e7e", borderBottom: "1px dashed #7e7e7e"}} to="/returns-and-refunds">Returns & Refunds</Link> for more info.</div>}
       </div>
 
       
@@ -236,8 +240,7 @@ const inactiveStyle = {
               padding: "9px 20px 10px",
               borderRadius: 30,
               color: "black",
-              background: "white",
-              fontSize: 14
+              background: "white"
             }}>Add to Bag</div>
           </button>
 

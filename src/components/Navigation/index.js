@@ -86,7 +86,7 @@ const Navigation = ({ siteTitle, location }) => {
   }
 
   function handleOnMouseOut() {
-  	setMenuActive(false)
+  	setTimeout(() => setMenuActive(false), 170)
   }
 
   // useEffect(() => {
@@ -103,7 +103,7 @@ const Navigation = ({ siteTitle, location }) => {
 	return(
 		<>
 			<InstantSearch searchClient={searchClient} indexName="coverful">
-				<div style={{height: "2.535rem", color: "rgb(38,38,38)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 14, backgroundColor: "#f7f7f7"}}>Enjoy free shipping on all UK orders! Shipping to rest of the world: £2.99
+				<div style={{height: "2.535rem", color: "rgb(38,38,38)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 14, backgroundColor: "#f7f7f7"}}>Enjoy free delivery on all UK orders! ✨
 				</div>
 				<Wrapper>
 					<Container className="black-text">
@@ -111,7 +111,7 @@ const Navigation = ({ siteTitle, location }) => {
 							<Logo to='/'>
 								{siteTitle}
 							</Logo>
-							<div style={{fontSize: "15px", letterSpacing: 1, fontWeight: "bold", padding: "0px 16px 80px 10px", display: "inline"}} onClick={handleMouseOver}>
+							<div style={{fontSize: "15px", letterSpacing: 1, fontWeight: "bold", padding: "0px 16px 80px 10px", display: "inline"}} tabIndex="0" onBlur={handleOnMouseOut} onClick={handleMouseOver}>
 							<div style={{width: 80, height: 40, position: "absolute", marginLeft: 0, display: "inline", cursor: "pointer"}}></div>
 
 								<span style={menuActive ? {opacity: 0.7, transition: "0.2s opacity cubic-bezier(0.65, 0.005, 0.35, 0.995)", cursor: "pointer"} : {opacity: "1", cursor: "pointer"}}>SHOP</span>

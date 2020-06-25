@@ -110,7 +110,7 @@ const ProductPage = ({ data }) => {
             <br /><br />
             <div style={{fontSize: 14, lineHeight: "1.4"}}>
               <span style={{fontFamily: "Avenir-Medium", fontSize: 16}}>Our Happiness Promise</span>
-              <br />We stand behind our products. If you don’t love it, <br />exchanges and returns are free for 60 days. 
+              <br />We stand behind our products. If you don’t love it, <br />exchanges and returns are free for 30 days. 
             </div>
           </GridRight>
         </TwoColumnGrid>
