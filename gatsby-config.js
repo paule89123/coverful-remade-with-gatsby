@@ -5,7 +5,7 @@ require('dotenv').config({
 })
 
 const myQuery = `{
-      allShopifyProduct(filter: {tags: {eq: "food and drink"}}) {
+      allShopifyProduct {
         edges {
           node {
             objectID: id
